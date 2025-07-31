@@ -50,18 +50,18 @@ export default function Login() {
   return (
     <>
       <div className='login-container'>
-        <h1 className='text-gradient'>Da Vinci Diary</h1>
-        <h2>Easy But Inventive Notetaking</h2>
-        <p>Leave your mark in the annals of history of your own daily bits</p>
+        <h1 className='text-gradient '>Da Vinci Diary</h1>
+        <h2 className='contrast'>Easy But Inventive Notetaking</h2>
+        <p className='contrast'>Leave your mark in the annals of history of your own daily bits</p>
         <div className="full-line"></div>
-        <h6>{isRegister?"Create an account": "Log in"}</h6>
+        <h6 className='contrast'>{isRegister?"Create an account": "Log in"}</h6>
         <div >
             <label htmlFor="email">Email</label>
             <input value={email} onChange={(e)=>setEmail(e.target.value)} id="email" type="email" placeholder="Enter your email address" />
         </div>
         <div>
             <label htmlFor="password">Password</label>
-            <input value={password} onChange={(e)=>setPassword(e.target.value)} id="password" type="password" placeholder="******" />
+            <input value={password} onChange={(e)=>setPassword(e.target.value)} id="password" type="password" placeholder={isRegister?"Min. 6 characters":"******"} />
         </div>
         <button onClick={handleAuthUser} disabled={cantAuth || isAuthenticating} className='submit-btn'>
             <h6>{isAuthenticating?'Submitting...':'Submit'}</h6>
