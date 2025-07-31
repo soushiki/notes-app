@@ -51,7 +51,7 @@ export default function Login() {
     <>
       <div className='login-container'>
         <h1 className='text-gradient '>Da Vinci Diary</h1>
-        <h2 className='contrast'>Easy But Inventive Notetaking</h2>
+        <h2 className='contrast'>Easy But Inventive Note-taking</h2>
         <p className='contrast'>Leave a mark in the annals of history of your own daily bits</p>
         <div className="full-line"></div>
         <h6 className='contrast'>{isRegister?"Create an account": "Log in"}</h6>
