@@ -130,40 +130,34 @@ export default function SideNav(props) {
                 <h6>New Note</h6>
                 <i className='fa-solid fa-plus'></i>
             </button>
-            <button onClick={()=>{setIsArchived(false)}} className='all-btn'>
-                <h6 >All</h6>
-            </button>
-        <button>
-            <h6 onClick={()=>{setIsArchived(true)}} className='archived-btn'>Archived</h6>
+            <button onClick={()=>{setIsArchived(false)}} className={'all-btn ' + (!isArchived ? 'selected': '')}>
+                <h6>All</h6>
+            </button >
+            <button onClick={()=>{setIsArchived(true)}} className={'archived-btn ' + (isArchived ? 'selected':'')}>
+                <h6  >Archived</h6>
             
-        </button>
+            </button>
         </div>
         <div  className='notes-list'>
                 {
-                     (!isArchived && noteIds.filter(e=>!e['archived']).length===0 ) ?
+                    (!isArchived && noteIds.filter(e=>!e['archived']).length===0 ) ?
                             
-                                <h6 className='message'>You don't have any notes</h6> :
-                                null
-                            
-                 } {(isArchived && noteIds.filter(e=>e['archived']).length===0 ) ?
-                           
-                                <h6 className='message' >You don't have any archived notes</h6>
+                            <h6 className='message'>You don't have any notes</h6> 
                             : null
-                 }
+                            
+                    }
+                    {(isArchived && noteIds.filter(e=>e['archived']).length===0 ) ?       
+                            <h6 className='message' >You don't have any archived notes</h6>
+                            : null
+                    }
                 
-                { 
-                     
-                    noteIds.length == 0 ?
-                    <p>You don't have any notes</p> :
-                    noteIds.map((note, i)=>{
-
-                        
-                        
-                        
+                    {      
+                    
+                        noteIds.map((note, i)=>{
                         if(isArchived && note['archived']){
                             const [n, d]= note['id'].split('__');
                             const date = (new Date(parseInt(d))).toString();
-                           
+                            
                             return (
                             <button onClick={()=> {
                                 router.push('/notes?id=' + note['id']);
@@ -172,7 +166,7 @@ export default function SideNav(props) {
                                 <p>{n}</p> 
                                 <small>{date.split(' ').slice(1, 4).join(' ')}</small>
                                 
-                                 <div className="note-actions">
+                                <div className="note-actions">
                                     <div className='archive-btn' onClick={(e)=>{
                                     e.stopPropagation(); 
                                     toggleArchiveNote(note['id'], note['archived']);
@@ -186,16 +180,16 @@ export default function SideNav(props) {
                                         }} className='delete-btn'>
                                         <i className='fa-solid fa-trash-can'>
                                         </i>
-                                     </div>
-                                 </div>
+                                    </div>
+                                </div>
                             </button> 
                         )
                         } else if( !isArchived && !note['archived']){
                             
                             const [n, d]= note['id'].split('__');
-                           
+                        
                         const date = (new Date(parseInt(d))).toString();
-                             return (
+                            return (
                             <button onClick={()=> {
                                 router.push('/notes?id=' + note['id']);
                                 setIsViewer(true);
@@ -203,7 +197,7 @@ export default function SideNav(props) {
                                 <p>{n}</p> 
                                 <small>{date.split(' ').slice(1, 4).join(' ')}</small>
                                 
-                                 <div className="note-actions">
+                                <div className="note-actions">
                                     <div className='archive-btn' onClick={(e)=>{
                                     e.stopPropagation(); 
                                     toggleArchiveNote(note['id'], note['archived']);
@@ -217,12 +211,12 @@ export default function SideNav(props) {
                                         }} className='delete-btn'>
                                         <i className='fa-solid fa-trash-can'>
                                         </i>
-                                     </div>
-                                 </div>
+                                    </div>
+                                </div>
                             </button> 
-                             )
+                            )
                         } 
-                       
+                    
                         
                     })       
                 }
@@ -234,5 +228,5 @@ export default function SideNav(props) {
             <i className='fa-solid fa-arrow-right-from-bracket'></i>
         </button>
     </section>
-  )
+    )
 }
