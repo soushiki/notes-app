@@ -20,6 +20,7 @@ export default function NotesPage(){
     const [savingNote, setSavingNote] = useState(false);  
     const [noteIds, setNoteIds] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [isArchived, setIsArchived] = useState(false);
 
     const { currentUser, isLoadingUser } = useAuth();
      
@@ -27,9 +28,10 @@ export default function NotesPage(){
 
     function handleCreateNote(){
         setNote( {
-            content: ''
+            content: '',
+            archive: false
         });
-        window.history.replaceState(null, '', '/note');
+        window.history.replaceState(null, '', '/notes');
         setIsViewer(false);
     }
 
@@ -40,8 +42,11 @@ export default function NotesPage(){
         })
 
     }
+    
  
     async function handleSaveNote(){
+
+       
 
         if(!note?.content){
             return
@@ -64,14 +69,18 @@ export default function NotesPage(){
 
                     
                     const newId = note.content.replaceAll('#', '').slice(0,15) + '__' + Date.now();
+                    console.log(newId);
                     const notesRef = doc(db, 'users', currentUser.uid, 'notes', newId);
                     const newDocInfo = await setDoc(notesRef, {
+                        id: newId,
                         content: note.content,
-                        createdAt: serverTimestamp()
-
+                        createdAt: serverTimestamp(),
+                        archive: false
                     });
-                    setNoteIds(curr => [...curr, newId])
-                    setNote({...note, id: newId});
+                    const newNote = {id: newId, archive: false};
+                    console.log(noteIds);
+                    setNoteIds(curr => [...curr, {id: newId, archive: false}])
+                    setNote({...note, id: newId });
                     window.history.pushState(null, '', `?id=${newId}`);
                 }
 
@@ -134,14 +143,14 @@ export default function NotesPage(){
     return (
         <main id="notes">
             
-            <SideNav setIsViewer={setIsViewer} handleCreateNote={handleCreateNote} noteIds={noteIds} setNoteIds={setNoteIds} showNav={showNav} setShowNav={setShowNav}/> 
+            <SideNav setNote={setNote} setIsViewer={setIsViewer} handleCreateNote={handleCreateNote} noteIds={noteIds} setNoteIds={setNoteIds} showNav={showNav} setShowNav={setShowNav} setIsArchived={setIsArchived} isArchived={isArchived}/> 
             
             { !isViewer 
                 &&  (
                 <Editor savingNote = {savingNote} handleSaveNote={handleSaveNote} text={note.content} setText={handleEditNote} isViewer={isViewer} toggleViewer={setIsViewer} showNav={showNav} setShowNav={setShowNav}/>
             )}
             { isViewer && (
-                <MDX  savingNote = {savingNote} handleSaveNote={handleSaveNote} text={note.content} setText={setText} isViewer={isViewer} toggleViewer={setIsViewer}  showNav={showNav} setShowNav={setShowNav}/>
+                <MDX  savingNote = {savingNote} handleSaveNote={handleSaveNote} text={note.content} setText={setText} isViewer={isViewer} toggleViewer={setIsViewer}  showNav={showNav} setShowNav={setShowNav} setNoteIds={setNoteIds}/>
             )}
         </main>
     );

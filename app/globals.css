@@ -67,6 +67,75 @@
     padding: 0.5rem;
 }
 
+.button-container{
+    
+    width: 100%;
+    display: grid;
+    
+    grid-template-areas: 
+    'top top'
+    'all archived';
+    gap: 0.5rem;
+    overflow: hidden;
+    
+
+}
+
+.new-btn{
+    grid-area: top;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+   
+}
+
+.new-btn i{
+    font-size: 0.5em;
+}
+
+.all-btn {
+    grid-area:all;
+}
+
+.archived-btn{
+    grid-area: archived;
+}
+
+
+.button-container h6{
+   
+    
+
+    font-size: 0.6em;
+    width: 100%;
+    margin: 0 auto;
+    overflow: nowrap;
+
+}
+
+.button-container i {
+    margin-right: 0.2rem;
+}
+
+
+
+.button-container button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    width: 100%;
+    padding: 0.5rem;
+    
+
+}
+
+.note-actions {
+    display: flex;
+    flex-direction: row;
+}
+
 .secondary-btns-container {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -200,6 +269,10 @@ footer a:hover {
 
 }
 
+.message {
+    font-size: 0.6rem;
+}
+
 .delete-btn {
     position: absolute;
     right: 1rem;
@@ -210,18 +283,36 @@ footer a:hover {
     transition-duration:200ms;
 }
 
+.archive-btn {
+    right: 1rem;
+    opacity: 0;
+    pointer-events: none;
+    transition-duration:200ms;
+    margin-top: 0.2rem;
+}
 
 
 
-.list-btn:hover .delete-btn{
+
+
+
+
+
+.list-btn:hover .delete-btn, .list-btn:hover .archive-btn{
     opacity: 1;
     pointer-events: all;
 
 
 }
 
+
+
 .list-btn:hover .delete-btn:hover{
     color: #ff4e7a;
+}
+
+.list-btn:hover .archive-btn:hover{
+    color: #d5e4ae;
 }
 
 .notes-container, .mdx-container {
@@ -279,6 +370,30 @@ article>div {
     .contrast {
         text-shadow: unset;
     }
+
+    .button-container{
+    
+    width: 100%;
+    display: grid;
+    grid-template-areas: 
+    'top top'
+    'all'
+    'archived';
+    gap: 0.5rem;
+    overflow: hidden;
+    
+
+}
+
+
+.button-container button {
+   
+    width: 100%;
+    
+
+}
+
+    
 }
 
 @media (min-width: 768px){
@@ -315,6 +430,8 @@ article>div {
         grid-column: span 2;
 
     }
+
+   
 }
 
 @media (min-width: 1024px){
@@ -343,4 +460,6 @@ article>div {
     .contrast {
         text-shadow: unset;
     }
+
+    
 }
