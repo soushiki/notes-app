@@ -8,7 +8,7 @@
 }
 
 .text-gradient{
-    background-image: linear-gradient(180deg, hsl(205, 78%, 79%) 0, hsl(240, 46%, 30%) 100%) !important;
+    background-image: linear-gradient(180deg, hsl(230, 66%, 64%) 0, hsl(183, 61%, 67%) 100%) !important;
 }
 
 /* Hero  */
@@ -261,6 +261,10 @@ article>div {
 
 /* Media queries */
 @media (min-width: 640px){
+
+    .text-gradient{
+    background-image: linear-gradient(180deg, hsl(235, 57%, 66%) 0, hsl(236, 45%, 55%) 100%) !important;
+    }
    
     #hero {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -271,10 +275,18 @@ article>div {
     position:  sticky;
     max-height: 100vh;
    }
+
+    .contrast {
+        text-shadow: unset;
+    }
 }
 
 @media (min-width: 768px){
 
+
+    .text-gradient{
+    background-image: linear-gradient(180deg, hsl(235, 57%, 66%) 0, hsl(236, 45%, 55%) 100%) !important;
+}
 
     #notes {
         grid-template-columns:  repeat(3, minmax(0, 1fr));
@@ -315,6 +327,10 @@ article>div {
    .hero-img {
     grid-column: span 2 / span 2;
    }
+
+   .text-gradient{
+    background-image: linear-gradient(180deg, hsl(235, 57%, 66%) 0, hsl(236, 45%, 55%) 100%) !important;
+}
 
    #notes {
     grid-template-columns: repeat(4, minmax(0, 1fr));
